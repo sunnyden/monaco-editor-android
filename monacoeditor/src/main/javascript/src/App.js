@@ -1,7 +1,7 @@
 import './App.css';
 import * as monaco from "monaco-editor";
-import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
-import {useCallback, useEffect, useRef, useState} from "react";
+import Editor, { loader } from "@monaco-editor/react";
+import {useEffect, useState} from "react";
 loader.config({ monaco });
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
     },[code])
     useEffect(()=>{
         if(window?.callback?.onLanguageChanged){
-            window.callback.onLanguageChanged(code)
+            window.callback.onLanguageChanged(language)
         }
     },[language])
     useEffect(()=>{
@@ -41,7 +41,7 @@ function App() {
     return (
         <Editor
           height="100%"
-          defaultLanguage="javascript"
+          defaultLanguage={language}
           value={code}
           onChange={setCode}
           theme={lightMode? "light":"vs-dark"}
