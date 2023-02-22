@@ -1,5 +1,5 @@
 plugins{
-    id "com.github.node-gradle.node" version "3.1.1"
+    id "com.github.node-gradle.node" version "3.5.1"
     id 'com.android.library'
 }
 
@@ -27,6 +27,18 @@ android {
     }
 }
 
+node {
+    download = true
+    version = "16.19.0"
+    npmInstallCommand = "install"
+    nodeProjectDir = file("src/main/javascript")
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
 dependencies {
     implementation "androidx.webkit:webkit:1.6.0"
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
@@ -35,14 +47,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
 
-task npmIns(type: NpmTask) {
-    setWorkingDir(file("src/main/javascript"))
-    args = ['install']
-}
-
 task npmBuild(type: NpmTask) {
     setWorkingDir(file("src/main/javascript"))
     args = ['run', 'build']
 }
-npmBuild.dependsOn(npmIns)
+npmBuild.dependsOn(npmInstall)
 preBuild.dependsOn(npmBuild)
