@@ -89,11 +89,14 @@ public class MonacoEditor extends WebView {
     }
 
     public void setCode(String code){
-        this.post(() -> evaluateJavascript("window.setCode(\""+ StringEscapeUtils.unescapeEcmaScript(code)+"\")", new ValueCallback<String>() {
-            @Override
-            public void onReceiveValue(String s) {
+        this.post(() -> evaluateJavascript("window.setCode(\""+ StringEscapeUtils.unescapeEcmaScript(code)+"\")", s -> {
 
-            }
+        }));
+    }
+
+    public void setLanguage(String language){
+        this.post(() -> evaluateJavascript("window.setLanguage(\""+ StringEscapeUtils.unescapeEcmaScript(language)+"\")", s -> {
+
         }));
     }
 
