@@ -2,6 +2,7 @@ import './App.css';
 import * as monaco from "monaco-editor";
 import Editor, { loader } from "@monaco-editor/react";
 import {useEffect, useState} from "react";
+import {loadSmaliSyntax} from "./custom-language/smali";
 loader.config({ monaco });
 
 function App() {
@@ -19,9 +20,11 @@ function App() {
         }
     },[]);
     useEffect(()=>{
-        if(window?.callback?.onReady){
-            window.callback.onReady()
-        }
+        loadSmaliSyntax(monaco).then(()=>{
+            if(window?.callback?.onReady){
+                window.callback.onReady()
+            }
+        })
     },[])
     useEffect(()=>{
         if(window?.callback?.onCodeChanged){
@@ -32,6 +35,7 @@ function App() {
         if(window?.callback?.onLanguageChanged){
             window.callback.onLanguageChanged(language)
         }
+        console.log("language changed")
     },[language])
     useEffect(()=>{
         if(window?.callback?.onThemeChanged){
@@ -41,7 +45,7 @@ function App() {
     return (
         <Editor
           height="100%"
-          defaultLanguage={language}
+          language={language}
           value={code}
           onChange={setCode}
           theme={lightMode? "light":"vs-dark"}
