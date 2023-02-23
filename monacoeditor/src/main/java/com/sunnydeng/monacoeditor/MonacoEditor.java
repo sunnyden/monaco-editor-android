@@ -95,7 +95,7 @@ public class MonacoEditor extends WebView {
     }
 
     public void setCode(String code){
-        this.post(() -> evaluateJavascript("window.setCode(\""+ Base64.encodeToString(code.getBytes(),Base64.NO_WRAP | Base64.URL_SAFE) +"\")", s -> {
+        this.post(() -> evaluateJavascript("window.setCode(\""+ Base64.encodeToString(code.getBytes(),Base64.NO_WRAP) +"\")", s -> {
 
         }));
     }
