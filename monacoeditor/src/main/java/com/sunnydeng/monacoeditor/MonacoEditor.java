@@ -3,6 +3,7 @@ package com.sunnydeng.monacoeditor;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Base64;
 import android.view.inputmethod.BaseInputConnection;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
@@ -94,7 +95,7 @@ public class MonacoEditor extends WebView {
     }
 
     public void setCode(String code){
-        this.post(() -> evaluateJavascript("window.setCode(\""+ StringEscapeUtils.unescapeEcmaScript(code)+"\")", s -> {
+        this.post(() -> evaluateJavascript("window.setCode(\""+ Base64.encodeToString(code.getBytes(),Base64.NO_WRAP | Base64.URL_SAFE) +"\")", s -> {
 
         }));
     }

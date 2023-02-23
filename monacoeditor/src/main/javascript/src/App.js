@@ -10,7 +10,9 @@ function App() {
     const [language,setLanguage] = useState("javascript")
     const [lightMode,setLightMode] = useState(true)
     useEffect(()=>{
-        window.setCode = setCode;
+        window.setCode = (base64)=>{
+            setCode(atob(base64))
+        };
         window.setLanguage = setLanguage;
         window.setLightMode = setLightMode;
         return ()=>{
