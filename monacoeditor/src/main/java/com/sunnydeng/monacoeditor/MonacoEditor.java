@@ -84,6 +84,11 @@ public class MonacoEditor extends WebView {
         }));
     }
 
+    @Override
+    public boolean onCheckIsTextEditor() {
+        return true;
+    }
+
     public void setOnReadyCallback(OnCodeEditorReadyCallback onCodeEditorReadyCallback){
         this.mOnCodeEditorReadyCallback = onCodeEditorReadyCallback;
     }
