@@ -47,6 +47,7 @@ function App() {
     return (
         <Editor
           height="100%"
+          defaultLanguage={language}
           language={language}
           value={code}
           onChange={setCode}
